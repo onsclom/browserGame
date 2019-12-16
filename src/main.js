@@ -18,10 +18,10 @@ function draw() {
   
   //update character location and draw it
   char.update();
-  square(char.x,char.y,char.size,4);
+  char.draw();
   
   //draw the platforms
   for (let platform of platforms) {
-    rect(platform.x,platform.y, platform.width, platform.height);
+    platform.draw();
   }
 }

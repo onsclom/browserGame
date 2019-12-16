@@ -1,5 +1,5 @@
 class Engine {
-  isPlayerTouching(player, )
+  score()
   {
     return true;
   }
