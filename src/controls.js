@@ -17,7 +17,8 @@ function keyReleased() {
     else {
       char.curDir=0;
     }
-  } else if (keyCode === 68 || keyCode === 39) {
+  } 
+  else if (keyCode === 68 || keyCode === 39) {
     
     char.right=false;
     if (char.left){
@@ -26,5 +27,8 @@ function keyReleased() {
     else {
       char.curDir=0;
     }
+  }
+  else if (keyCode === 32) {
+    char.jump();
   }
 }
