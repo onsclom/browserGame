@@ -6,6 +6,9 @@ function keyPressed() {
     char.right=true;
     char.curDir=1;
   }
+  else if (keyCode === 32) {
+    char.jump();
+  }
 }
 
 function keyReleased() {
@@ -27,8 +30,5 @@ function keyReleased() {
     else {
       char.curDir=0;
     }
-  }
-  else if (keyCode === 32) {
-    char.jump();
   }
 }

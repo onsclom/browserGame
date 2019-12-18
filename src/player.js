@@ -6,12 +6,14 @@ class Player {
     this.height=this.size;
     this.width=this.size;
     this.speed=5;
+    this.jumpStrength=12;
     
     this.gravity=1;
     this.yvel=0;
-    this.ymax=4;
+    this.ymax=10;
     
     this.jumping=false;
+    this.grounded=false;
     
     this.left=false;
     this.right=false;
@@ -26,32 +28,64 @@ class Player {
   }
   
   update() {
-    let inside = false;
     let oldx = this.x;
     let oldy = this.y;
-    this.x += this.speed*this.curDir;
 
-    this.yvel+=.1;
+    //apply gravity and check if at max
+    this.yvel+=this.gravity;
     if (this.yvel>this.ymax) {
       this.yvel=this.ymax;
     }
     this.y+=this.yvel;
 
+    //check if should be ontop of a platform
     for (let platform of platforms) {
-      if (this.isTouching(platform))
+      //if its above the put ontop
+      if (this.isTouching(platform) && oldy+this.width<=platform.y)
       {
-        print("WOW");
-        inside = true;
         //teleport it above thing for now 
         this.y=platform.y-this.height;
         this.yvel=0;
+        this.grounded=true;
         break;
       }
+      //if its on the side then stay on side
+      else if (this.isTouching(platform))
+      {
+
+        print("aye");
+        //two cases
+        //1 on right
+        if (oldx+this.width<=platform.x)
+        {
+          print(oldx+this.width);
+          this.x=platform.x-this.width;
+        }
+        else
+        {
+          print("WAT");
+        }
+      }
+    }
+
+    //check if outside of frame
+    this.x += this.speed*this.curDir;
+    if (this.x<0)
+    {
+      this.x=0;
+    }
+    else if (this.x+this.width>width)
+    {
+      this.x=width-this.width;
     }
   }
 
   jump() {
-    this.yvel-=3;
+    if (this.grounded)
+    {
+      this.yvel=-this.jumpStrength;
+      this.grounded=false;
+    }
   }
 
   isTouching(thing) {

@@ -11,6 +11,8 @@ for (let i=0;i<platformAmount;i++) {
 
 function setup() {
   createCanvas(600, 500);
+
+  platforms.push(new Platform(20));
 }
 
 function draw() {
@@ -24,4 +26,5 @@ function draw() {
   for (let platform of platforms) {
     platform.draw();
   }
+
 }
