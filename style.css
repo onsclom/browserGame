@@ -9,3 +9,11 @@ canvas {
   margin: auto;
   outline: black 5px solid;
 }
+
+p {
+  display: block;
+  margin: 2%;
+  display: center;
+  text-align: center;
+  color: rgb(211, 211, 211);
+}
