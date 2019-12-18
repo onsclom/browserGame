@@ -30,6 +30,9 @@ class Player {
   update() {
     let oldx = this.x;
     let oldy = this.y;
+    //set new X
+    this.x += this.speed*this.curDir;
+    // this may be overidden later if it goes into object
 
     //apply gravity and check if at max
     this.yvel+=this.gravity;
@@ -38,7 +41,6 @@ class Player {
     }
     this.y+=this.yvel;
 
-    this.x += this.speed*this.curDir;
     //check if should be ontop of a platform
     for (let platform of platforms) {
       //if its above the put ontop
@@ -59,12 +61,11 @@ class Player {
         //1 on right
         if (oldx+this.width<=platform.x)
         {
-          print(oldx+this.width);
           this.x=platform.x-this.width;
         }
-        else
+        else if (oldx>=platform.x+platform.width)
         {
-          print("WAT");
+          this.x=platform.x+platform.width;
         }
       }
     }
