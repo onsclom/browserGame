@@ -19,11 +19,11 @@ class Player {
     this.right=false;
     this.curDir=0;
 
-    this.colorVal=(0, 0, 200);
+    this.colorVal=color('#fff')
   }
 
   draw() {
-    fill(color(this.colorVal));
+    fill(this.colorVal);
     square(this.x,this.y,this.size,4);
   }
   
@@ -79,6 +79,11 @@ class Player {
     {
       this.x=width-this.width;
     }
+
+    if (this.y>height)
+    {
+      this.die();
+    }
   }
 
   jump() {
@@ -87,6 +92,11 @@ class Player {
       this.yvel=-this.jumpStrength;
       this.grounded=false;
     }
+  }
+
+  die() {
+    this.x=0;
+    this.y=0;
   }
 
   isTouching(thing) {

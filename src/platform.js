@@ -4,11 +4,12 @@ class Platform {
     this.y=ay;
     this.width=aw;
     this.height=ah;
-    this.colorVal=(0, 204, 100);
+    this.colorVal=color('#0aa');
   }
 
   draw() {
-    fill(color(this.colorVal));
+    noStroke();
+    fill(this.colorVal);
     rect(this.x,this.y, this.width, this.height)
   }
 
