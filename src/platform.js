@@ -1,9 +1,9 @@
 class Platform {
-  constructor(num) {
-    this.x=num;
-    this.y=450;
-    this.width=25;
-    this.height=50;
+  constructor(ax,ay,aw,ah) {
+    this.x=ax;
+    this.y=ay;
+    this.width=aw;
+    this.height=ah;
     this.colorVal=(0, 204, 100);
   }
 

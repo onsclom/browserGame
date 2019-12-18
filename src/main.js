@@ -1,18 +1,21 @@
-let char = new Player();
+let char;
 let platforms = [];
-let platformAmount = 4;
-let distances = [0,2,5,8]
-
-//making platforms
-for (let i=0;i<platformAmount;i++) {
-  x = distances[i%distances.length]*50;
-  platforms.push(new Platform(x));
-}
 
 function setup() {
-  createCanvas(600, 500);
+  createCanvas(600, 300);
+  char = new Player();
 
-  platforms.push(new Platform(20));
+  //left side 
+  platforms.push(new Platform(0,2/3*height,1/10*width,1/3*height));
+  //right side
+  platforms.push(new Platform(width-1/10*width,2/3*height,1/10*width,1/3*height));
+
+  //now to spawn 4 middle skinny ones
+  for (let i=0;i<4;i++)
+  {
+    platforms.push(new Platform(.2*width+i*.18*width,2/3*height,1/20*width,1/3*height));
+  }
+
 }
 
 function draw() {
