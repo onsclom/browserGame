@@ -38,6 +38,7 @@ class Player {
     }
     this.y+=this.yvel;
 
+    this.x += this.speed*this.curDir;
     //check if should be ontop of a platform
     for (let platform of platforms) {
       //if its above the put ontop
@@ -69,7 +70,6 @@ class Player {
     }
 
     //check if outside of frame
-    this.x += this.speed*this.curDir;
     if (this.x<0)
     {
       this.x=0;
