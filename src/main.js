@@ -37,11 +37,11 @@ function draw() {
     birds[i].draw();
     if (birds[i].x+birds[i].size<0 && birds[i].dir==0)
     {
-      birds.splice(i);
+      birds.splice(i,1);
     }
     else if (birds[i].dir==1 && birds[i].x-birds[i].size>width)
     {
-      birds.splice(i);
+      birds.splice(i,1);
     }
   }
   
