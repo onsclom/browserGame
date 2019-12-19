@@ -1,5 +1,6 @@
 let char;
 let platforms = [];
+let birds = [];
 
 function setup() {
   let canvas = createCanvas(600, 300);
@@ -21,6 +22,28 @@ function setup() {
 
 function draw() {
   background(color('#daa'));
+  //lets make a little sun
+  let sunSize=.25*width
+  fill(color('#eb9'));
+  circle(width, 0, sunSize);
+
+  //rng to spawn bird
+  if (Math.round(Math.random()*500)==1) {
+    birds.push(new Bird(25+Math.round(Math.random()*50),Math.round(Math.random())))
+  }
+  //make birds
+  for (let i=birds.length-1;i>=0;i--)//go in reverse since popping duh
+  {
+    birds[i].draw();
+    if (birds[i].x+birds[i].size<0 && birds[i].dir==0)
+    {
+      birds.pop(i);
+    }
+    else if (birds[i].dir==1 && birds[i].x-birds[i].size>width)
+    {
+      birds.pop(i);
+    }
+  }
   
   //update character location and draw it
   char.update();
@@ -30,10 +53,4 @@ function draw() {
   for (let platform of platforms) {
     platform.draw();
   }
-
-  //lets make a little sun
-  let sunSize=.25*width
-  fill(color('#eb9'));
-  circle(width, 0, sunSize);
-
 }
