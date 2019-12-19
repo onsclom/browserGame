@@ -16,7 +16,7 @@ function setup() {
   //now to spawn 4 middle skinny ones
   for (let i=0;i<4;i++)
   {
-    platforms.push(new Platform(.2*width+i*.18*width,2/3*height,1/20*width,1/3*height));
+    platforms.push(new Platform(.2*width+i*.18*width,3/4*height,1/20*width,1/3*height));
   }
 }
 
