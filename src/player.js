@@ -50,13 +50,30 @@ class Player {
         this.y=platform.y-this.height;
         this.yvel=0;
         this.grounded=true;
+
+        if (!platform.touched)
+        {
+          platform.touched=true;
+          curScore+=1;
+
+          if (platform.podium!="middle")
+          {
+            variatePlatforms();
+            for (let x of platforms)
+            {
+              if (x!=platform)
+              {
+                x.touched=false;
+              }
+            }
+          }
+        }
+
         break;
       }
       //if its on the side then stay on side
       else if (this.isTouching(platform))
       {
-
-        print("aye");
         //two cases
         //1 on right
         if (oldx+this.width<=platform.x)
@@ -67,6 +84,7 @@ class Player {
         {
           this.x=platform.x+platform.width;
         }
+        break;
       }
     }
 
@@ -97,6 +115,13 @@ class Player {
   die() {
     this.x=0;
     this.y=0;
+    curScore=0;
+    
+    //reset all platforms to untouched
+    for (let platform of platforms)
+    {
+      platform.touched=false;
+    }
   }
 
   isTouching(thing) {
