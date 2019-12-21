@@ -17,3 +17,19 @@ p {
   text-align: center;
   color: rgb(211, 211, 211);
 }
+
+#a {
+  background-color: rgb(140, 140, 0);
+  width: 500px;
+  margin:auto;
+}
+
+#curScore {
+  display: inline;
+  float: left;
+}
+
+#highScore {
+  display: inline;
+  float: right;
+}

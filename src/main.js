@@ -1,6 +1,10 @@
 let char;
 let platforms = [];
+let standardLocations = [];
 let birds = [];
+let curScore = 0;
+let highScore = 0;
+let variance = .03*width; //how much +/- the platforms may change by
 
 function setup() {
   let canvas = createCanvas(600, 300);
@@ -13,11 +17,18 @@ function setup() {
   //right side
   platforms.push(new Platform(width-1/10*width,2/3*height,1/10*width,1/3*height));
 
-  //now to spawn 4 middle skinny ones
-  for (let i=0;i<4;i++)
+  standardLocations = [.5*width-1/40*width,.5*width-1/40*width,.5*width-1/40*width];
+
+  platforms.push( new Platform(.5*width-1/40*width-.22*width,3/4*height,1/20*width,1/3*height));
+  platforms.push( new Platform(.5*width-1/40*width,3/4*height,1/20*width,1/3*height));
+  platforms.push( new Platform(.5*width-1/40*width+.22*width,3/4*height,1/20*width,1/3*height));
+  /*
+  for (let i=0;i<3;i++)
   {
     platforms.push(new Platform(.2*width+i*.18*width,3/4*height,1/20*width,1/3*height));
   }
+  */
+
 }
 
 function draw() {
@@ -53,4 +64,8 @@ function draw() {
   for (let platform of platforms) {
     platform.draw();
   }
+
+  //write scores
+  document.getElementById("curScore").textContent="score: "+curScore;
+  document.getElementById("highScore").textContent="high score: "+highScore;
 }
