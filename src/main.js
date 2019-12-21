@@ -13,15 +13,15 @@ function setup() {
   char = new Player();
 
   //left side 
-  platforms.push(new Platform(0,2/3*height,1/10*width,1/3*height));
+  platforms.push(new Platform(0,2/3*height,1/10*width,1/3*height,"left"));
   //right side
-  platforms.push(new Platform(width-1/10*width,2/3*height,1/10*width,1/3*height));
+  platforms.push(new Platform(width-1/10*width,2/3*height,1/10*width,1/3*height,"right"));
 
   standardLocations = [.5*width-1/40*width,.5*width-1/40*width,.5*width-1/40*width];
 
-  platforms.push( new Platform(.5*width-1/40*width-.22*width,3/4*height,1/20*width,1/3*height));
-  platforms.push( new Platform(.5*width-1/40*width,3/4*height,1/20*width,1/3*height));
-  platforms.push( new Platform(.5*width-1/40*width+.22*width,3/4*height,1/20*width,1/3*height));
+  platforms.push( new Platform(.5*width-1/40*width-.22*width,3/4*height,1/20*width,1/3*height,"middle"));
+  platforms.push( new Platform(.5*width-1/40*width,3/4*height,1/20*width,1/3*height,"middle"));
+  platforms.push( new Platform(.5*width-1/40*width+.22*width,3/4*height,1/20*width,1/3*height,"middle"));
   /*
   for (let i=0;i<3;i++)
   {
@@ -65,7 +65,8 @@ function draw() {
     platform.draw();
   }
 
-  //write scores
+  //write/update scores
+  highScore=max(highScore,curScore);
   document.getElementById("curScore").textContent="score: "+curScore;
   document.getElementById("highScore").textContent="high score: "+highScore;
 }

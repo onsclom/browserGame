@@ -1,10 +1,11 @@
 class Platform {
-  constructor(ax,ay,aw,ah) {
+  constructor(ax,ay,aw,ah,type) {
     this.x=ax;
     this.y=ay;
     this.width=aw;
     this.height=ah;
     this.colorVal=color('#0aa');
+    this.podium=type;
   }
 
   draw() {
