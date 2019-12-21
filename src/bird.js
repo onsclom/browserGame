@@ -15,7 +15,9 @@ class Bird {
             this.x=width;
         }
 
-        this.colorVal=color('#aea');
+        this.colors= [color('#f88'),color('#8f8'),color('#88f')]
+
+        this.colorVal=random(this.colors);
     }
 
     draw() {
