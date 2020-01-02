@@ -6,11 +6,11 @@ class Player {
     this.height=this.size;
     this.width=this.size;
     this.speed=5;
-    this.jumpStrength=12;
+    this.jumpStrength=14;
     
     this.gravity=1;
     this.yvel=0;
-    this.ymax=10;
+    this.ymax=13;
     
     this.jumping=false;
     this.grounded=false;
@@ -110,6 +110,14 @@ class Player {
       this.yvel=-this.jumpStrength;
       this.grounded=false;
     }
+  }
+
+  jumpRelease() {
+    if (this.yvel < 0)
+    {
+      this.yvel=0;
+    }
+    console.log("test");
   }
 
   die() {

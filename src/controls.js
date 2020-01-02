@@ -31,4 +31,7 @@ function keyReleased() {
       char.curDir=0;
     }
   }
+  else if (keyCode === 32) {
+    char.jumpRelease();
+  }
 }
