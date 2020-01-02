@@ -27,34 +27,35 @@ function setup() {
 
 }
 
+function makeBirds() {
+    //rng to spawn bird
+    if (Math.round(Math.random()*200)==1) {
+      let end = Math.random()*(width-.025*width);
+      birds.push(new Bird(25+Math.round(Math.random()*25), Math.round(Math.random()),end));
+    }
+    //make birds
+    for (let i=birds.length-1;i>=0;i--)//go in reverse since popping duh
+    {
+      birds[i].draw();
+      if (birds[i].y>height)
+      {
+        birds.splice(i,1);
+      }
+    }
+}
+
 function draw() {
   background(color('#daa'));
   //lets make a little sun
   let sunSize=.25*width
   fill(color('#eb9'));
   circle(width, 0, sunSize);
-
-  //rng to spawn bird
-  if (Math.round(Math.random()*500)==1) {
-    birds.push(new Bird(25+Math.round(Math.random()*50),Math.round(Math.random())))
-  }
-  //make birds
-  for (let i=birds.length-1;i>=0;i--)//go in reverse since popping duh
-  {
-    birds[i].draw();
-    if (birds[i].x+birds[i].size<0 && birds[i].dir==0)
-    {
-      birds.splice(i,1);
-    }
-    else if (birds[i].dir==1 && birds[i].x-birds[i].size>width)
-    {
-      birds.splice(i,1);
-    }
-  }
   
   //update character location and draw it
   char.update();
   char.draw();
+
+  makeBirds();
   
   //draw the platforms
   for (let platform of platforms) {

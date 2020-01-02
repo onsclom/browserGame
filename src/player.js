@@ -41,6 +41,44 @@ class Player {
     }
     this.y+=this.yvel;
 
+    this.platformInteraction(oldx,oldy);
+    this.birdInteraction(oldx,oldy);
+
+    //check if outside of frame
+    if (this.x<0)
+    {
+      this.x=0;
+    }
+    else if (this.x+this.width>width)
+    {
+      this.x=width-this.width;
+    }
+
+    if (this.y>height)
+    {
+      this.die();
+    }
+  }
+
+  birdInteraction(oldx,oldy) {
+    for (let bird of birds) {
+      if (bird.killx > this.x && bird.killx < this.x+this.size && bird.killy > this.y && bird.killy < this.y+this.size)
+      {
+        if (bird.killx>oldx && bird.killx<oldx+this.size && bird.killy-bird.fallingGrav< oldy+this.size)
+        {
+          this.die();
+        }
+        else
+        {
+          this.grounded=true;
+          this.jump();
+          this.grounded=true;
+        }
+      }
+    }
+  }
+
+  platformInteraction(oldx,oldy) {
     //check if should be ontop of a platform
     for (let platform of platforms) {
       //if its above the put ontop
@@ -87,21 +125,6 @@ class Player {
         break;
       }
     }
-
-    //check if outside of frame
-    if (this.x<0)
-    {
-      this.x=0;
-    }
-    else if (this.x+this.width>width)
-    {
-      this.x=width-this.width;
-    }
-
-    if (this.y>height)
-    {
-      this.die();
-    }
   }
 
   jump() {
@@ -117,7 +140,6 @@ class Player {
     {
       this.yvel=0;
     }
-    console.log("test");
   }
 
   die() {
@@ -130,6 +152,8 @@ class Player {
     {
       platform.touched=false;
     }
+
+    birds=[];//clear out all birds
   }
 
   isTouching(thing) {
