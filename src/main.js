@@ -54,13 +54,13 @@ function draw() {
   //update character location and draw it
   char.update();
   char.draw();
-
-  makeBirds();
   
   //draw the platforms
   for (let platform of platforms) {
     platform.draw();
   }
+
+  makeBirds();
 
   //write/update scores
   highScore=max(highScore,curScore);
