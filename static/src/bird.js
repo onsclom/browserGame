@@ -7,6 +7,8 @@ class Bird {
         this.size=.025*width;
         this.state=1; //1=flying, 0=falling
         this.end=end;
+        this.killy=0;
+        this.killx=0;
 
         this.fallingGrav=1.5;
 

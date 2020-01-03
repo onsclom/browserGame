@@ -75,15 +75,15 @@ class Player {
       let birdY = bird.y-this.size*.25;
       let birdWidth = bird.size*2;
       let birdHeight = bird.size;
-      if (bird.killx > this.x && bird.killx < this.x+this.size && bird.killy > this.y && bird.killy < this.y+this.size)
+      if (bird.killx >= this.x && bird.killx <= this.x+this.size  && bird.killy >= this.y && bird.killy <= this.y+this.size && this.curInv==0)
       {
-        if (bird.killx>oldx && bird.killx<oldx+this.size && bird.killy-bird.fallingGrav< oldy+this.size && bird.state==0 && !this.curInv)
+        if (bird.killx>=oldx && bird.killx<=oldx+this.size && bird.killy-bird.fallingGrav <= oldy+this.size && bird.state==0)
         {
           this.die();
         }
       }
       else if ((this.x <= birdX+birdWidth && this.x+this.width >= birdX
-          && this.y <= birdY+birdHeight && this.y+this.height >= birdY))
+          && this.y <= birdY+birdHeight*.5 && this.y+this.height >= birdY))
       {
         this.curInv=this.invFrames;
         this.bounce();
