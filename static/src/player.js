@@ -164,9 +164,10 @@ class Player {
 
   die() {
     this.x=0;
-    this.y=0+this.size;
+    this.y=0-this.size;
     curScore=0;
     birdCount=0;
+    this.curInv=this.invFrames;
     
     //reset all platforms to untouched
     for (let platform of platforms)
