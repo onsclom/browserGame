@@ -1,0 +1,15 @@
+{
+  "name": "p5game",
+  "version": "1.0.0",
+  "description": "Repo for p5 browser game.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

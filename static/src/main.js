@@ -32,7 +32,7 @@ function makeBirds() {
     //rng to spawn bird
     birdCount+=1;
     if (birdCount>=max(5,100-curScore*.5)) {
-      let end = Math.random()*(width-.025*width);
+      let end = .05*width+Math.random()*(width-.05*width);
       birds.push(new Bird(25+Math.round(Math.random()*25), Math.round(Math.random()),end));
       birdCount = 0;
     }

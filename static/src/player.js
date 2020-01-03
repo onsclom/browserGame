@@ -8,6 +8,8 @@ class Player {
     this.speed=5;
     this.jumpStrength=14;
     this.bounceStrength=10;
+    this.curInv=0;
+    this.invFrames=60;
     
     this.gravity=1;
     this.yvel=0;
@@ -20,11 +22,17 @@ class Player {
     this.right=false;
     this.curDir=0;
 
-    this.colorVal=color('#fff')
+    this.colorVal=color('#fff');
   }
 
   draw() {
+    if (this.curInv)
+    {
+      this.colorVal.setAlpha(150);
+      this.curInv-=1;
+    }
     fill(this.colorVal);
+    this.colorVal.setAlpha(255);
     square(this.x,this.y,this.size,4);
   }
   
@@ -69,7 +77,7 @@ class Player {
       let birdHeight = bird.size;
       if (bird.killx > this.x && bird.killx < this.x+this.size && bird.killy > this.y && bird.killy < this.y+this.size)
       {
-        if (bird.killx>oldx && bird.killx<oldx+this.size && bird.killy-bird.fallingGrav< oldy+this.size && bird.state==0)
+        if (bird.killx>oldx && bird.killx<oldx+this.size && bird.killy-bird.fallingGrav< oldy+this.size && bird.state==0 && !this.curInv)
         {
           this.die();
         }
@@ -77,6 +85,7 @@ class Player {
       else if ((this.x <= birdX+birdWidth && this.x+this.width >= birdX
           && this.y <= birdY+birdHeight && this.y+this.height >= birdY))
       {
+        this.curInv=this.invFrames;
         this.bounce();
         bird.fallingGrav+=1.5;
         bird.state=0;
@@ -155,7 +164,7 @@ class Player {
 
   die() {
     this.x=0;
-    this.y=0;
+    this.y=0+this.size;
     curScore=0;
     birdCount=0;
     
@@ -165,7 +174,10 @@ class Player {
       platform.touched=false;
     }
 
-    birds=[];//clear out all birds
+    for (let bird of birds)
+    {
+      bird.state=0;
+    }
   }
 
   isTouching(thing) {
