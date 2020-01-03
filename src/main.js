@@ -5,6 +5,7 @@ let birds = [];
 let curScore = 0;
 let highScore = 0;
 let variance; //how much +/- the platforms may change by
+let birdCount = 0;
 
 function setup() {
   let canvas = createCanvas(600, 300);
@@ -29,9 +30,11 @@ function setup() {
 
 function makeBirds() {
     //rng to spawn bird
-    if (Math.round(Math.random()*200)==1) {
+    birdCount+=1;
+    if (birdCount>=max(5,100-curScore*.5)) {
       let end = Math.random()*(width-.025*width);
       birds.push(new Bird(25+Math.round(Math.random()*25), Math.round(Math.random()),end));
+      birdCount = 0;
     }
     //make birds
     for (let i=birds.length-1;i>=0;i--)//go in reverse since popping duh

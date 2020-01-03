@@ -7,6 +7,7 @@ class Player {
     this.width=this.size;
     this.speed=5;
     this.jumpStrength=14;
+    this.bounceStrength=10;
     
     this.gravity=1;
     this.yvel=0;
@@ -62,18 +63,23 @@ class Player {
 
   birdInteraction(oldx,oldy) {
     for (let bird of birds) {
+      let birdX = bird.x-this.size;
+      let birdY = bird.y-this.size*.25;
+      let birdWidth = bird.size*2;
+      let birdHeight = bird.size;
       if (bird.killx > this.x && bird.killx < this.x+this.size && bird.killy > this.y && bird.killy < this.y+this.size)
       {
-        if (bird.killx>oldx && bird.killx<oldx+this.size && bird.killy-bird.fallingGrav< oldy+this.size)
+        if (bird.killx>oldx && bird.killx<oldx+this.size && bird.killy-bird.fallingGrav< oldy+this.size && bird.state==0)
         {
           this.die();
         }
-        else
-        {
-          this.grounded=true;
-          this.jump();
-          this.grounded=true;
-        }
+      }
+      else if ((this.x <= birdX+birdWidth && this.x+this.width >= birdX
+          && this.y <= birdY+birdHeight && this.y+this.height >= birdY))
+      {
+        this.bounce();
+        bird.fallingGrav+=1.5;
+        bird.state=0;
       }
     }
   }
@@ -136,16 +142,22 @@ class Player {
   }
 
   jumpRelease() {
-    if (this.yvel < 0)
+    if (this.yvel < 0 && this.grounded==false)
     {
       this.yvel=0;
     }
+  }
+
+  bounce() {
+    this.yvel=-this.bounceStrength;
+    this.grounded=true;
   }
 
   die() {
     this.x=0;
     this.y=0;
     curScore=0;
+    birdCount=0;
     
     //reset all platforms to untouched
     for (let platform of platforms)
