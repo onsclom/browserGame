@@ -26,12 +26,13 @@ function setup() {
   platforms.push( new Platform(standardLocations[1],3/4*height,1/20*width,1/3*height,"middle"));
   platforms.push( new Platform(standardLocations[2],3/4*height,1/20*width,1/3*height,"middle"));
 
+  // birds.push(new RedBird(25+Math.round(Math.random()*25), Math.round(Math.random()),100)); for debugging
 }
 
 function makeBirds() {
     //rng to spawn bird
     birdCount+=1;
-    if (birdCount>=max(5,100-curScore*.5)) {
+    if (birdCount>=max(40,100-curScore*.5)) {
       let end = .05*width+Math.random()*(width-.05*width);
       birds.push(new Bird(25+Math.round(Math.random()*25), Math.round(Math.random()),end));
       birdCount = 0;
