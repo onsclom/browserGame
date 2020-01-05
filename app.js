@@ -15,8 +15,6 @@ app.get('/leaderboard', (req, res) => res.sendFile(path.join(__dirname,'static',
 
 app.listen(port, () => console.log(`Example app listening on port localhost:${port}`));
 
-
-
 //now for dealing with fetches
 app.use(express.json({limit:'1mb'}));
 
