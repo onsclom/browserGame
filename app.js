@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+const Pool = require('pg').Pool
+require('dotenv').config() //this is to read DATABASE_URL from .env
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+})
+
 const port = process.env.PORT || 3000;
-
-const db = require('./database')
-
-app.use('/test', (req, res) => res.send(db.getUsers));
 
 app.use('/public',express.static(path.join(__dirname,'static')));
 
@@ -18,11 +21,6 @@ app.listen(port, () => console.log(`Example app listening on port localhost:${po
 //now for dealing with fetches
 app.use(express.json({limit:'1mb'}));
 
-app.post('/testing', (req, res) => {
-    console.log('I got a request!');
-    console.log(req.body);
-    //res.end();
-    res.json({
-        blah: "wow"
-    });
-})
+app.post('/testing', (req, res) =>
+    pool.query('SELECT * FROM main ORDER BY score DESC', (err,dbstuff)=>res.json(dbstuff.rows))
+)

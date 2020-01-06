@@ -1,16 +1,26 @@
 function getLeaderboard() {
-  console.log("WOW");
-  let test = 4;
-  let test2 = 8;
-  const data = { test, test2 };
   const options = {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({test: "w"})
   }
-  fetch('/testing', options).then(response => {
-    response.json().then(response => console.log(response))
-  });
+
+  fetch('/testing', options)
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      let count = 0;
+      let parentDiv = document.getElementById("leaderboardDiv");
+      for (x of json)
+      {
+        let newEntry = document.createElement("p");
+        
+        newEntry.textContent = count+1 + '. ' + x.name + ' ' + x.score;
+        parentDiv.appendChild(newEntry);
+        count+=1;
+      }
+    });
+    
 }
