@@ -24,3 +24,12 @@ app.use(express.json({limit:'1mb'}));
 app.post('/testing', (req, res) =>
     pool.query('SELECT * FROM main ORDER BY score DESC', (err,dbstuff)=>res.json(dbstuff.rows))
 )
+
+app.post('/score', (req, res) =>
+    {
+        console.log(req.body);
+        const dbQuery= 'INSERT INTO main VALUES (\''+req.body.name+'\','+req.body.score+');'
+        console.log(dbQuery);
+        pool.query(dbQuery);
+    }
+)

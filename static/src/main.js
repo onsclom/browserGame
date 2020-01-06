@@ -86,3 +86,17 @@ function variatePlatforms() {
     platforms[i].step=0;
   }
 }
+
+function uploadScore() {
+  let playerName = document.getElementById('nameTextbox').value;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({name: playerName, score: curScore})
+  }
+
+  fetch('/score', options);
+}

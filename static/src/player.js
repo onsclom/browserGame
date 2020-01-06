@@ -163,6 +163,7 @@ class Player {
   }
 
   die() {
+    uploadScore();
     this.x=0;
     this.y=0-this.size;
     curScore=0;
