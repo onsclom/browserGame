@@ -11,6 +11,12 @@ const pool = new Pool({
 
 const port = process.env.PORT || 3000;
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use('/public',express.static(path.join(__dirname,'static')));
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname,'static','index.html')));
@@ -23,8 +29,6 @@ app.use(express.json({limit:'1mb'}));
 
 app.post('/testing', (req, res) =>
     {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         pool.query('SELECT * FROM main ORDER BY score DESC', (err,dbstuff)=>res.json(dbstuff.rows));
     }
 )
