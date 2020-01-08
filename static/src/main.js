@@ -108,6 +108,11 @@ function dumbNameCheck() {
 function uploadScore() {
   let playerName = document.getElementById('nameTextbox').value;
 
+  if (!dumbNameCheck())
+  {
+    playerName = "Anonymous";
+  }
+
   const options = {
     method: 'POST',
     headers: {
