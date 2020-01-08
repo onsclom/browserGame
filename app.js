@@ -22,7 +22,11 @@ app.listen(port, () => console.log(`Example app listening on port localhost:${po
 app.use(express.json({limit:'1mb'}));
 
 app.post('/testing', (req, res) =>
-    pool.query('SELECT * FROM main ORDER BY score DESC', (err,dbstuff)=>res.json(dbstuff.rows))
+    {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        pool.query('SELECT * FROM main ORDER BY score DESC', (err,dbstuff)=>res.json(dbstuff.rows));
+    }
 )
 
 app.post('/score', (req, res) =>
