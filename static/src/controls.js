@@ -1,4 +1,9 @@
 function keyPressed() {
+  if (document.activeElement.nodeName == 'INPUT')
+  {
+    return;
+  }
+
   if (keyCode === 65 || keyCode === 37) {
     char.left=true;
     char.curDir=-1;
@@ -6,12 +11,18 @@ function keyPressed() {
     char.right=true;
     char.curDir=1;
   }
-  else if (keyCode === 32) {
+  else if (keyCode === 32 || keyCode === 87) {
     char.jump();
   }
+  return;
 }
 
 function keyReleased() {
+  if (document.activeElement.nodeName == 'INPUT')
+  {
+    return;
+  }
+
   if (keyCode === 65 || keyCode === 37) {
     char.left=false;
     if (char.right){
@@ -31,7 +42,8 @@ function keyReleased() {
       char.curDir=0;
     }
   }
-  else if (keyCode === 32) {
+  else if (keyCode === 32 || keyCode === 87) {
     char.jumpRelease();
   }
+  return;
 }

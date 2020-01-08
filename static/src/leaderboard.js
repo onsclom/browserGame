@@ -17,7 +17,7 @@ function getLeaderboard() {
       {
         let newEntry = document.createElement("p");
         
-        newEntry.textContent = count+1 + '. ' + x.name + ' ' + x.score;
+        newEntry.textContent = count+1 + '. ' + x.name + ' - ' + x.score;
         parentDiv.appendChild(newEntry);
         count+=1;
       }

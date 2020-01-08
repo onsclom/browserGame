@@ -49,6 +49,8 @@ function makeBirds() {
 }
 
 function draw() {
+  dumbNameCheck();
+
   background(color('#daa'));
   //lets make a little sun
   let sunSize=.25*width
@@ -85,6 +87,22 @@ function variatePlatforms() {
 
     platforms[i].step=0;
   }
+}
+
+function dumbNameCheck() {
+  let playerName = document.getElementById('nameTextbox').value;
+  let letters = /^[A-Za-z]+$/;
+  let numbers = /^[0-9]/;
+  for (const char of playerName) 
+  {
+    if (!char.match(letters) && !char.match(numbers) && char!=" ")
+    {
+      document.getElementById("badName").style.display="block";
+      return false;
+    }
+  }
+  document.getElementById("badName").style.display="none";
+  return true;
 }
 
 function uploadScore() {
