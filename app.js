@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const Pool = require('pg').Pool
-require('dotenv').config() //this is to read DATABASE_URL from .env
+const Pool = require('pg').Pool;
+require('dotenv').config();
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL
@@ -27,7 +27,7 @@ app.listen(port, () => console.log(`Example app listening on port localhost:${po
 //now for dealing with fetches
 app.use(express.json({limit:'1mb'}));
 
-app.post('/testing', (req, res) =>
+app.get('/getLeaderboard', (req, res) =>
     {
         pool.query('SELECT * FROM main ORDER BY score DESC', (err,dbstuff)=>res.json(dbstuff.rows));
     }
@@ -39,5 +39,13 @@ app.post('/score', (req, res) =>
         const dbQuery= 'INSERT INTO main VALUES (\''+req.body.name+'\','+req.body.score+');'
         console.log(dbQuery);
         pool.query(dbQuery);
+    }
+)
+
+app.post('/getLeaderboard', (req, res) =>
+    {
+        console.log(req.body);
+        queryString = "SELECT * FROM main WHERE name='" + req.body.name + "' ORDER BY score DESC" 
+        pool.query(queryString, (err,dbstuff)=>res.json(dbstuff.rows));
     }
 )
