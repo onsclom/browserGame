@@ -45,7 +45,7 @@ app.post('/score', (req, res) =>
 app.post('/getLeaderboard', (req, res) =>
     {
         console.log(req.body);
-        queryString = "SELECT * FROM main WHERE name='" + req.body.name + "' ORDER BY score DESC" 
+        queryString = "SELECT * FROM main WHERE name='" + req.body.name + "' ORDER BY score DESC";
         pool.query(queryString, (err,dbstuff)=>res.json(dbstuff.rows));
     }
 )

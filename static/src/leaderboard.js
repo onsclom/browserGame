@@ -61,5 +61,13 @@ function getLeaderboardWithName() {
         parentDiv.appendChild(newEntry);
         count+=1;
       }
+
+      if (json.length == 0)
+      {
+        let newEntry = document.createElement("p");
+        
+        newEntry.textContent = "No entries with the name '" + name + "' found.";
+        parentDiv.appendChild(newEntry);
+      }
     });
 }
